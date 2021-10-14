@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="co.aram.prj.student.service.StudentMapper">
+	<select id="studentSelectList"
+		resultType="co.aram.prj.student.service.StudentVO">
+		select * from student
+	</select>
+
+	<select id="studentSelect"
+		parameterType="co.aram.prj.student.service.StudentVO"
+		resultType="co.aram.prj.student.service.StudentVO">
+		select * from student where id = #{id}
+		<if test="password != null and password !=''">
+			and password = #{password}
+		</if>
+	</select>
+
+	<insert id="studentInsert"
+		parameterType="co.aram.prj.student.service.StudentVO">
+		insert into student(id,password,name,major)
+		values(#{id},#{password},#{name},#{major})
+	</insert>
+
+	<update id="studentUpdate"
+		parameterType="co.aram.prj.student.service.StudentVO">
+		update student set password = #{password}, name =
+		#{name}, major = #{major}, author = #{author}
+		where id = #{id}
+	</update>
+
+	<delete id="studentDelete"
+		parameterType="co.aram.prj.student.service.StudentVO">
+		delete from student where id = #{id}
+	</delete>
+
+</mapper>
